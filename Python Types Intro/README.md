@@ -142,9 +142,52 @@ def process_items(items: list[str]):
 
 > [!TIP]
 > اگر از Python 3.9 یا بالاتر استفاده می کنید، نیازی نیست List را از typing وارد کنید، می توانید به جای آن از همان نوع معمول list استفاده کنید.
+-----------------------
 با انجام این کار، ویرایشگر شما می تواند حتی در حین پردازش موارد از لیست نیز پشتیبانی کند.<br><br>
--------------------------
+
 <img src="https://fastapi.tiangolo.com/img/python-types/image05.png"><br><br>
+
+بدون انواع، تقریباً غیرممکن است که به این دستاورد دست یافت.<br><br>
+توجه داشته باشید که متغیر item یکی از عناصر لیست items است.<br><br>
+و هنوز هم، ویرایشگر می داند که یک str است و برای آن پشتیبانی ارائه می دهد.<br><br>
+# تاپل و ست
+برای اعلام tuples و sets نیز به همین ترتیب عمل خواهید کرد:<br><br>
+python 3.9+<br><br>
+```python
+def process_items(items_t: tuple[int, int, str], items_s: set[bytes]):
+    return items_t, items_s
+```
+بدین معنی:
+* متغیر items_t یک tuple با 3 مورد است، یک int، یک int دیگر و یک str.
+* متغیر items_s یک set است و هر یک از موارد آن از نوع bytes است.
+
+# دیکشنری
+
+برای تعریف یک dict، شما 2 پارامتر نوع را با کاما جدا می کنید <br><br>
+پارامتر نوع اول برای کلیدهای dict است<br><br>
+پارامتر نوع دوم برای مقادیر dict است:<br><br>
+python 3.9+<br><br>
+```python
+def process_items(prices: dict[str, float]):
+    for item_name, item_price in prices.items():
+        print(item_name)
+        print(item_price)
+```
+بدین معنی:<br><br>
+* متغیر prices یک dict است:
+* کلیدهای این dict از نوع str هستند (یعنی نام هر مورد). 
+* مقادیر این dict از نوع float هستند (یعنی قیمت هر مورد).
+
+# اونیون
+شما می توانید اعلام کنید که یک متغیر می تواند از چند نوع مختلف باشد، به عنوان مثال یک int یا یک str.<br><br>
+در Python 3.6 و بالاتر (از جمله Python 3.10) می‌توانید از نوع Union از typing استفاده کنید و انواع ممکن را در براکت‌ها قرار دهید.<br><br>
+در Python 3.10 همچنین یک نحو جدید وجود دارد که می‌توانید انواع ممکن را با یک میله عمودی (|) جدا کنید.<br><br>
+python 3.10+<br><br>
+```python
+def process_item(item: int | str):
+    print(item)
+```
+
 
 
 
