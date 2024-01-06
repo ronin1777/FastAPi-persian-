@@ -134,7 +134,7 @@ def process_items(items: list[str]):
         print(item)
 ```
 
-> [!Info]
+> [!INFO]
 >آن انواع داخلی در براکت های مربع "پارامترهای نوع" نامیده می شوند.<br><br>
 > در این مورد، str پارامتر نوع پاس داده شده به List (یا list در Python 3.9 و بالاتر) است.
 
