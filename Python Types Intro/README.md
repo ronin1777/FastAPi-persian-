@@ -20,8 +20,10 @@ def get_full_name(first_name, last_name):
 print(get_full_name("john", "doe"))
 ```
 <br>
-خروجی برنامه:
-```
+خروجی برنامه:<br>
 John Doe
-```
 <br>
+تابع به شرح زیر عمل می کند:<br>
+* first_name و last_name را میگیرد
+* با title() ان ها را به حروف اول انها رابزرگ میکند 
+* آنها را با یک اسپیس به هم متصل می کند.
