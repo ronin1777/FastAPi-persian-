@@ -11,7 +11,7 @@ FastAPI به طور کامل بر اساس این "type hints" استوار اس
 
 # انگیزه
 بیاید با یک مثال ساده شروع کنیم:<br><br>
-```angular2html
+```python
 def get_full_name(first_name, last_name):
     full_name = first_name.title() + " " + last_name.title()
     return full_name
@@ -19,3 +19,9 @@ def get_full_name(first_name, last_name):
 
 print(get_full_name("john", "doe"))
 ```
+<br>
+خروجی برنامه:
+```
+John Doe
+```
+<br>
