@@ -7,4 +7,15 @@
 FastAPI به طور کامل بر اساس این "type hints" استوار است، آنها مزایای زیادی را به آن می دهند.<br><br>
 اما حتی اگر هرگز از **FastAPI** استفاده نکنید، دانستن اندکی در مورد آنها برای شما مفید خواهد بود.<br><br>
 > [!NOTE]
-> اگر یک متخصص پایتون هستید و قبلاً همه چیز در مورد "type hints" را می دانید، به فصل بعدی بروید.
+> اگر یک متخصص پایتون هستید و قبلاً همه چیز در مورد "type hints" را می دانید، به فصل بعدی بروید.<br><br>
+
+# انگیزه
+بیاید با یک مثال ساده شروع کنیم:<br><br>
+```angular2html
+def get_full_name(first_name, last_name):
+    full_name = first_name.title() + " " + last_name.title()
+    return full_name
+
+
+print(get_full_name("john", "doe"))
+```
