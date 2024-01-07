@@ -304,5 +304,102 @@ async def get_model(model_name: ModelName):
 >[!TIP]
 > همچنین می توانید مقدار "lenet" را با ModelName.lenet.value دسترسی پیدا کنید.
 
+# بازگرداندن اعضای enumeration
+<br><br>
+میتوانید اعضای شمارش را از عملیات مسیر خود بازگردانید، حتی اگر در یک بدنه JSON (مانند یک dict) قرار دارند.<br><br>
+
+قبل از بازگشت به client، آنها به مقادیر متناظر خود (در این مورد رشته ها) تبدیل می شوند.<br><br>
+```python
+from enum import Enum
+
+from fastapi import FastAPI
+
+
+class ModelName(str, Enum):
+    alexnet = "alexnet"
+    resnet = "resnet"
+    lenet = "lenet"
+
+
+app = FastAPI()
+
+
+@app.get("/models/{model_name}")
+async def get_model(model_name: ModelName):
+    if model_name is ModelName.alexnet:
+        return {"model_name": model_name, "message": "Deep Learning FTW!"}
+
+    if model_name.value == "lenet":
+        return {"model_name": model_name, "message": "LeCNN all the images"}
+
+    return {"model_name": model_name, "message": "Have some residuals"}
+```
+<br><br>
+در client خود یک پاسخ JSON مانند این دریافت خواهید کرد.
+<br><br>
+```python
+{
+  "model_name": "alexnet",
+  "message": "Deep Learning FTW!"
+}
+```
+<br><br>
+# پارامترهای مسیر حاوی مسیرها
+<br><br>
+فرض کنید یک عملیات مسیر با مسیر /files/{file_path} دارید.
+<br><br>
+اما شما نیاز دارید که file_path خود حاوی یک مسیر باشد، مانند home/johndoe/myfile.txt.
+بنابراین، URL آن فایل چیزی شبیه به این خواهد بود: <br><br>
+/files/home/johndoe/myfile.txt.
+<br><br>
+# حمایت OpenAPI
+<br><br>
+OpenAPI راهی برای اعلام یک پارامتر مسیر برای حاوی یک مسیر داخلی ارائه نمی دهد، زیرا این امر می تواند منجر به سناریوهایی شود که دشوار است تست و تعریف شوند.
+<br><br>
+با این حال، شما هنوز هم می توانید این کار را در FastAPI انجام دهید، با استفاده از یکی از ابزارهای داخلی Starlette.<br><br>
+
+و اسناد هنوز هم کار می کنند، اگرچه هیچ گونه مستنداتی اضافه نمی کنند که پارامتر باید حاوی یک مسیر باشد.
+<br><br>
+# مبدل مسیر
+<br><br>
+با استفاده از گزینه ای مستقیماً از Starlette، می توانید یک پارامتر مسیر حاوی یک مسیر را با استفاده از URL مانند:/files/{file_path:path} اعلام کنید.
+<br><br>
+در این حالت، نام پارامتر file_path است و قسمت آخر آن، :path به آن می گوید که پارامتر باید با هر مسیری مطابقت داشته باشد.
+<br><br>
+بنابراین، می توانید از آن با استفاده از کد زیر استفاده کنید:
+<br><br>
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get("/files/{file_path:path}")
+async def read_file(file_path: str):
+    return {"file_path": file_path}
+```
+>[!TIP]
+> شما ممکن است نیاز داشته باشید که پارامتر حاوی /home/johndoe/myfile.txt باشد، با یک اسلش پیشرو (/).
+> در این حالت، URL اینگونه خواهد بود: /files//home/johndoe/myfile.txt, با دو اسلش (//) بین files و home.
+
+# خلاصه مطالب
+<br><br>
+با FastAPI، با استفاده از اعلامات نوع Python کوتاه، شهودی و استاندارد، شما دریافت می کنید:
+
+* پشتیبانی ویرایشگر: بررسی خطاها، تکمیل خودکار، و غیره.
+* "تجزیه" داده
+* اعتبارسنجی داده
+* آشنایی با API و مستندات خودکار
+
+و فقط باید آنها را یک بار اعلام کنید.
+
+<br><br>
+
+این احتمالاً مهمترین مزیت قابل مشاهده FastAPI در مقایسه با چارچوب های جایگزین (به غیر از عملکرد خام) است.
+
+
+
+
+
 
 
